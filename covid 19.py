@@ -4,31 +4,13 @@ import numpy  as np
 import matplotlib.pyplot as pt
 import requests
 
-json_data_url = requests.get('https://api.covid19india.org/raw_data.json')
-json_file = open('G:\\MCA\\sem 4\\Python\\covid\\rawjson.json','w')
-json_file.write(str(json_data_url.text))
-json_file.close()
-
-inputFile = open('G:\\MCA\\sem 4\\Python\\covid\\rawjson.json') 
-outputFile = open('G:\\MCA\\sem 4\\Python\\covid\\covidcsv.csv','w') 
-data = json.load(inputFile)
-inputFile.close()
-
-#writing into cvs file
-output = csv.writer(outputFile)
-output.writerow(data['raw_data'][0].keys())
-for row in data['raw_data']:
-    output.writerow(row.values())
-    
-#converting cvs file to excel
-read_file = pd.read_csv (r'G:\\MCA\\sem 4\\Python\\covid\\covidcsv.csv',encoding="cp1252")
-read_file.to_excel (r'G:\\MCA\\sem 4\\Python\\covid\\covidexcel.xlsx', index = None, header=True)
-
+response=url.urlopen("https://api.covid19india.org/raw_data.json")
+temp_data=json.load(response)
+file=pd.DataFrame(temp_data["raw_data"])
 print('covid 19 data is Ready to use :')
-
-#read excel file and show it in graph
-file=pd.read_excel('G:\\MCA\\sem 4\\Python\\covid\\covidexcel.xlsx')
+print()
 file.fillna("undefined", inplace = True) 
+
 #line graph
 a=0
 b=0
@@ -75,7 +57,7 @@ for i in file['agebracket']:
         cc=cc+1
     elif(i>='61' and i<='80'):
         dd=dd+1
-    elif(i<='81'):
+    elif(i>='81'):
         ee=ee+1
         
     
@@ -118,4 +100,3 @@ pt.ylabel("Total number of people")
 
 ax.pie(coviddata, labels = lab,autopct='%1.2f%%')
 pt.show()
-
