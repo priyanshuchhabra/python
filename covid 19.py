@@ -58,8 +58,7 @@ for i in file['agebracket']:
     elif(i>='61' and i<='80'):
         dd=dd+1
     elif(i>='81'):
-        ee=ee+1
-        
+        ee=ee+1       
     
 print("Between 1 to 20 :",aa)
 print("Between 21 to 40 :",bb)
@@ -97,6 +96,5 @@ coviddata = [m,f]
 pt.title("COVID_19 DATA")
 pt.xlabel("Current Status")
 pt.ylabel("Total number of people")
-
 ax.pie(coviddata, labels = lab,autopct='%1.2f%%')
 pt.show()
