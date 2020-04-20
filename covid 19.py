@@ -8,7 +8,7 @@ import requests
 response=url.urlopen("https://api.covid19india.org/raw_data.json")
 temp_data=json.load(response)
 file=pd.DataFrame(temp_data["raw_data"])
-print('covid 19 data is Ready to use :')
+print('Dataset of covid 19 is Ready to use :')
 print()
 file.fillna("undefined", inplace = True) 
 
